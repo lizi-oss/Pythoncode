@@ -2,12 +2,25 @@
 # 输出为当前的时间(只包含时、分和秒)，其格式为HH:MM:SS，其中SS表示小时，范围为0-23，MM表示分钟，SS表示秒。
 # 例如输入46800999，则输出为13：00：00。在程序中调用该函数，检查输出结果是否正确
 def time(count):
-    count=count%3600%24
-    HH=count/3600
-    MM=count/3600%60
-    SS=count/3600/60
-    print(f"{HH}:{MM}:{SS}")
-#主函数
-a=int(input("请输入您所想要的从1970年1月1日00时00分00秒到当前的时刻经过的毫秒数:"))
+    # 毫秒转换为秒
+    total_seconds = count // 1000
+
+    # 取一天以内的秒数
+    total_seconds = total_seconds % (24 * 3600)
+
+    # 计算时分秒
+    HH = total_seconds // 3600
+    MM = (total_seconds % 3600) // 60
+    SS = total_seconds % 60
+
+    # 按格式输出
+    print(f"{HH:02d}:{MM:02d}:{SS:02d}")
+
+
+# 主函数
+a = int(input("请输入从1970年1月1日00时00分00秒到当前经过的毫秒数:"))
+
 time(a)
 
+#错误原因首先没看见题目要求是毫秒，
+#其次在编写代码的时候区分python’/‘和’//‘的区别,'/'得到浮点数’//‘取整%取余
